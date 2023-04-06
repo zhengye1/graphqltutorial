@@ -1,0 +1,76 @@
+type User {
+    id:Int!
+    name:String
+}
+
+type Player {
+    id:Int!
+    user:User
+    gameId:Int
+    startingWind:Direction
+}
+
+
+type Game{
+    id:Int!
+    currentRepeat:Int
+    currentRound:Int
+    riichiLeftover:Int
+    honba:Int
+    handResults:[HandResult]
+    players:[Player]
+    score:Score
+    status:Status
+}
+
+type GameContainer{
+    id:Int!
+    name:String
+}
+
+type HandResult{
+    scoreDelta:Score
+    riichiLeftover:Int
+    honba:Int
+    nextRound:Int
+    nextRepeat:Int
+    round:Int
+    repeat:Int
+    events:[HandEvent]
+}
+
+type HandEvent{
+    id:Int
+    handId:Int
+    type:HandEventType
+    han:Int
+    fu:Int
+    tenpai:Int
+    actor:Direction
+    target:Direction
+}
+
+type Score{
+    EAST:Int
+    SOUTH:Int
+    WEST:Int
+    NORTH:Int
+}
+
+enum Direction{
+    EAST
+    SOUTH
+    WEST
+    NORTH
+}
+
+enum Status{
+    IN_PROGRESS, COMPLETED
+}
+enum HandEventType{
+    Riichi
+    Ron
+    Tsumo
+    Exhausive_draw
+    Chombo
+}
